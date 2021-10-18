@@ -14,6 +14,7 @@ export const useHomeFetch = () => {
   const [state, setState] = useState(initialState);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   /* Fetch the Movies */
   const fetchMovies = async (page, searchTerm = "") => {
@@ -33,10 +34,22 @@ export const useHomeFetch = () => {
     setLoading(false);
   };
 
-  /* Trigger when mount */
+  /* Trigger when mount or search */
   useEffect(() => {
-    fetchMovies(1);
-  }, []);
+    // Clear search
+    setState(initialState);
+    fetchMovies(1, searchTerm);
+  }, [searchTerm]);
 
-  return { state, loading, error, setSearchTerm };
+  /* Trigger when Load More */
+  useEffect(() => {
+    if (!isLoadingMore) return;
+
+    //Get more pages
+    fetchMovies(state.page + 1, searchTerm);
+    setIsLoadingMore(false);
+
+  }, [isLoadingMore, searchTerm, state.page]);
+
+  return { state, loading, error, setSearchTerm, searchTerm, setIsLoadingMore };
 };
