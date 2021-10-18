@@ -3,7 +3,7 @@ import styled from "styled-components";
 /* --- HeaderStyle --- */
 // Header->Wrapper
 export const Wrapper = styled.div`
-    background: var(--darkGray);
+    background: var(--darkGrey);
     padding: 0 20px;
 `;
 // Header->Content
