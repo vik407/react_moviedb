@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 // Get the configuration
 import { POSTER_SIZE, BACKDROP_SIZE, IMAGE_BASE_URL } from "../config";
@@ -10,6 +10,7 @@ import { useHomeFetch } from "../hooks/useHomeFetch";
 import HeroImage from "./HeroImage";
 import MovieGrid from "./MovieGrid";
 import Thumb from "./Thumb";
+import Spinner from "./Spinner";
 
 const Home = () => {
   const { state, loading, error } = useHomeFetch();
@@ -38,6 +39,7 @@ const Home = () => {
           />
         ))}
       </MovieGrid>
+      <Spinner />
     </>
   );
 };
